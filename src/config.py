@@ -8,7 +8,7 @@ DEVICE = os.environ.get("PHONE_ASSESSMENT_DEVICE", "cuda")
 
 # Configure these before running the notebooks.
 MANIFEST_PATH = Path(os.environ.get("PHONE_ASSESSMENT_MANIFEST_PATH", "data/manifests"))
-COMMON_PATH = Path(os.environ.get("PHONE_ASSESSMENT_DATA_PATH", "data"))
+DATA_PATH = Path(os.environ.get("PHONE_ASSESSMENT_DATA_PATH", "data"))
 
 SANDI_CEFR_DICT = {
     "a2": 2.0,
