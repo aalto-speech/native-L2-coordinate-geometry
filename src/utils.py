@@ -34,50 +34,24 @@ from config import MANIFEST_PATH
 
 
 ##### Lhotse #####
-class LhotseElement(Enum):
-    RecordingSet = "recordings"
-    SupervisionSet = "supervisions"
-
-
-def get_file_path(
-    corpus_name: str,
-    lhotse_element: LhotseElement,
-    partition_name: str,
-    prepath: str = None,
-    file_format: str = "jsonl.gz",
-):
-    return f"{prepath or MANIFEST_PATH}/{corpus_name}/{partition_name}_{lhotse_element.value}.{file_format}"
-
-
-def create_cutset_from_rec_and_sup(
-    corpus_name: str, partition_names: List, prepath: str = None
-):
+def get_cuts(corpus_name: str, partition_names: list[str], manifest_dir: str = "."):
     cuts = {}
 
     for partition in partition_names:
-        rec_path = get_file_path(
-            corpus_name=corpus_name,
-            lhotse_element=LhotseElement.RecordingSet,
-            partition_name=partition,
-            prepath=prepath,
+        recordings = RecordingSet.from_file(
+            f"{manifest_dir}/{corpus_name}/{partition}_recording_set.jsonl.gz"
+        )
+        supervisions = SupervisionSet.from_file(
+            f"{manifest_dir}/{corpus_name}/{partition}_supervision_set.jsonl.gz"
         )
 
-        sup_path = get_file_path(
-            corpus_name=corpus_name,
-            lhotse_element=LhotseElement.SupervisionSet,
-            partition_name=partition,
-            prepath=prepath,
+        cuts[partition] = CutSet.from_manifests(
+            recordings=recordings,
+            supervisions=supervisions,
         )
-
-        recordings = RecordingSet.from_file(f"/var/tmp/raissit1/cm/{rec_path}")
-
-        supervisions = SupervisionSet.from_file(f"/var/tmp/raissit1/cm/{sup_path}")
-
-        p_cuts = CutSet.from_manifests(recordings=recordings, supervisions=supervisions)
-
-        cuts[partition] = p_cuts
 
     return cuts
+
 
 
 ##### General #####
