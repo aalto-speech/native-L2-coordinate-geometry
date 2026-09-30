@@ -1,11 +1,3 @@
-"""Project settings.
-
-Set the two paths below to the locations of your Lhotse manifests and derived
-paper artefacts.  They deliberately have no institution-specific defaults.
-"""
-
-from __future__ import annotations
-
 import os
 from pathlib import Path
 
@@ -36,5 +28,17 @@ MODELS = {
     "wavlm_base_plus": {
         "hf_name": "microsoft/wavlm-base-plus",
         "layer": [6, 9],
+    },
+    "wavlm_large": {
+        "hf_name": "microsoft/wavlm-large",
+        "layer": [12, 15],
+    },
+    "w2v2_large": {
+        "hf_name": "facebook/wav2vec2-large-lv60",
+        "layer": [12, 15],
+    },
+    "w2v2_xlsr_53": {
+        "hf_name": "facebook/wav2vec2-large-xlsr-53",
+        "layer": [12, 15],
     },
 }
