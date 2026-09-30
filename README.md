@@ -41,15 +41,3 @@ not include audio, Lhotse manifests, alignments, feature matrices, codebooks,
 or distance pickles; obtain and place those data according to their respective
 data-use agreements.
 
-## Evaluation imports
-
-The former mixed `distance_evaluation.py` module has been split.  Import the
-dataset-specific evaluator explicitly:
-
-```python
-from distance_evaluation_sandi import analyze_all_distance_associations
-from distance_evaluation_umeerj import umeerj_evaluate_distance_grid_clean
-```
-
-This keeps the SANDI CEFR workflow separate from the UME-ERJ rater-aware
-workflow and avoids distributing duplicate evaluator code.

@@ -1,4 +1,4 @@
-from typing import Any, Iterable
+from typing import Any, Iterable, Optional
 
 import numpy as np
 from pathlib import Path
@@ -1045,7 +1045,7 @@ def compute_overall_representation_distances(
 def collect_sandi_cuts_by_part(
     cuts: Iterable[Any],
     upper_bound: int = 100,
-    indices: set[int] | None = None,
+    indices: Optional[set[int]] = None,
 ) -> dict[str, dict[float, list[tuple[int, Any]]]]:
     scores = [x / 2 for x in range(4, 12)]
     result: dict[str, dict[float, list[tuple[int, Any]]]] = {}
@@ -1079,12 +1079,11 @@ def compute_overall_representation_distances_by_part(
     codebook: dict[str, Any],
     test_averaged_phones: dict[int, Any],
     n_cuts: int = 30,
-    levels: dict[str, Any] | None = None,
+    levels: dict[str, Any] = None,
     pairs: dict[
         str,
         dict[int, dict[str, Any]],
-    ]
-    | None = None,
+    ]= None,
     global_mean_normalization: bool = True,
     maha_mode: str = "diag",
     maha_alpha: float = 0.1,
@@ -1093,7 +1092,7 @@ def compute_overall_representation_distances_by_part(
     normalize_by_dim: bool = True,
     cosine_noise_mode: str = "none",
     cosine_noise_level: float = 1.0,
-    cosine_noise_seed: int | None = None,
+    cosine_noise_seed: int = None,
 ) -> dict[str, dict[str, dict[str, list[float]]]]:
     """
     Compute representation distances independently for each part.
@@ -1355,7 +1354,7 @@ def compute_representation_distances_for_recording_id(
     normalize_by_dim: bool = True,
     cosine_noise_mode: str = "none",
     cosine_noise_level: float = 1.0,
-    cosine_noise_seed: int | None = None,
+    cosine_noise_seed: int = None,
 ) -> dict[str, Any]:
     """
     Compute distances for one specific recording_id.
