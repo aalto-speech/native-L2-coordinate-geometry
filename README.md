@@ -1,4 +1,4 @@
-# Native-reference coordinate geometry for L2 pronunciation analysis
+# Native-Reference Phone-Class Geometry for L2 Pronunciation Analysis
 
 This repository contains research code and example Jupyter notebooks for
 building native-reference phone representations, calculating distances for
